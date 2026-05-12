@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>for you - the only one</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Nunito:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #FAF7F5;
+            --bg-warm: #F3EDE8;
+            --fg: #2D2926;
+            --fg-light: #6B635B;
+            --accent: #8B5A5A;
+            --accent-deep: #5C4033;
+            --rose: #C9A9A6;
+            --cream: #F5EDE6;
+            --sage: #8A9A7B;
+            --terracotta: #B8754A;
+            --card: #FFFFFF;
+            --border: #E5DDD5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--bg);
+            color: var(--fg);
+            overflow-x: hidden;
+            line-height: 1.8;
+        }
+
+        .font-serif {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        /* Subtle paper texture */
+        .paper-texture::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.02;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* Reveal animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), 
+                        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), 
+                        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(30px);
+            transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), 
+                        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal-right.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), 
+                        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal-scale.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .delay-1 { transition-delay: 0.15s; }
+        .delay-2 { transition-delay: 0.3s; }
+        .delay-3 { transition-delay: 0.45s; }
+        .delay-4 { transition-delay: 0.6s; }
+        .delay-5 { transition-delay: 0.75s; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal, .reveal-left, .reveal-right, .reveal-scale {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
+
+        /* Hero */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg-image {
+            position: absolute;
+            inset: 0;
+            opacity: 0.12;
+        }
+        .hero-bg-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Floating heart */
+        @keyframes float-heart {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+        .float-heart {
+            animation: float-heart 4s ease-in-out infinite;
+        }
+
+        /* Pulse glow */
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(201, 169, 166, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(201, 169, 166, 0.5); }
+        }
+        .pulse-glow {
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+
+        /* Handwritten underline */
+        .handwritten-underline {
+            position: relative;
+            display: inline-block;
+        }
+        .handwritten-underline::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 12px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 12'%3E%3Cpath d='M2 8 Q25 2 50 8 T98 6' stroke='%23C9A9A6' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat;
+            background-size: 100% 100%;
+        }
+
+        /* Timeline */
+        .timeline-line {
+            position: absolute;
+            left: 24px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--rose), var(--sage));
+        }
+        @media (min-width: 768px) {
+            .timeline-line {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        .timeline-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 4px solid var(--bg);
+            box-shadow: 0 0 0 3px var(--rose);
+            position: relative;
+            z-index: 2;
+            flex-shrink: 0;
+        }
+
+        /* Memory cards */
+        .memory-card {
+            background: var(--card);
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            transition: all 0.4s ease;
+        }
+        .memory-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+        }
+
+        /* Quote section */
+        .quote-section {
+            position: relative;
+        }
+        .quote-section::before {
+            content: '"';
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 200px;
+            line-height: 0;
+            color: var(--rose);
+            opacity: 0.15;
+            position: absolute;
+            top: 40px;
+            left: 20px;
+        }
+
+        /* Button */
+        .btn-love {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--accent);
+            color: white;
+            padding: 16px 40px;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-love:hover {
+            background: var(--accent-deep);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(139, 90, 90, 0.3);
+        }
+        .btn-love:focus-visible {
+            outline: 2px solid var(--rose);
+            outline-offset: 3px;
+        }
+
+        /* Photo gallery */
+        .photo-frame {
+            position: relative;
+            background: white;
+            padding: 12px 12px 40px 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            transform: rotate(-2deg);
+            transition: transform 0.4s ease;
+        }
+        .photo-frame:nth-child(2) {
+            transform: rotate(1deg);
+        }
+        .photo-frame:nth-child(3) {
+            transform: rotate(-1deg);
+        }
+        .photo-frame:hover {
+            transform: rotate(0deg) scale(1.02);
+            z-index: 10;
+        }
+        .photo-tape {
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 20px;
+            background: rgba(201, 169, 166, 0.6);
+        }
+
+        /* Scroll indicator */
+        @keyframes bounce-gentle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
+        }
+        .scroll-indicator {
+            animation: bounce-gentle 2s ease-in-out infinite;
+        }
+
+        /* Counter */
+        .counter-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 300;
+            color: var(--accent);
+        }
+
+        /* Love letter style */
+        .love-letter {
+            background: linear-gradient(135deg, var(--cream) 0%, white 100%);
+            position: relative;
+        }
+        .love-letter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--rose), var(--sage));
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--rose);
+            border-radius: 4px;
+        }
+
+        /* Nav */
+        .nav-blur {
+            background: rgba(250, 247, 245, 0.9);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="paper-texture">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex items-center justify-between h-20">
+                <a href="#" class="font-serif text-xl tracking-wide" style="color: var(--accent);">
+                    Untuk Kamu
+                </a>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#story" class="text-sm tracking-wide transition-opacity hover:opacity-60" style="color: var(--fg-light);">Cerita Kita</a>
+                    <a href="#moments" class="text-sm tracking-wide transition-opacity hover:opacity-60" style="color: var(--fg-light);">Momen</a>
+                    <a href="#letter" class="text-sm tracking-wide transition-opacity hover:opacity-60" style="color: var(--fg-light);">Surat</a>
+                </div>
+                <button id="mobileMenuBtn" class="md:hidden p-2" aria-label="Menu">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <line x1="4" y1="7" x2="20" y2="7"/>
+                        <line x1="4" y1="12" x2="20" y2="12"/>
+                        <line x1="4" y1="17" x2="20" y2="17"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+   <!-- Hero Section -->
+<section class="hero-section">
+    <!-- Background Image dengan Opacity Penuh -->
+    <div class="hero-bg-image opacity-15">
+        <img src="https://i.pinimg.com/736x/eb/fe/24/ebfe240514168070b76d66abfa0fce2e.jpg" 
+             alt="Romantic background" 
+             loading="eager"
+             class="w-full h-full object-cover">
+    </div>
+    
+    <!-- Overlay gelap agar teks terbaca -->
+    <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
+    
+        
+        <div class="relative z-10 w-full px-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <p class="reveal text-sm tracking-widest uppercase mb-6" style="color: var(--accent);">
+                    Sebuah Persembahan
+                </p>
+                <h1 class="reveal delay-1 font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light leading-tight mb-8" style="color: var(--fg);">
+                    YOU ARE <br>
+                    <span class="handwritten-underline" style="color: var(--accent);">THE ONLY ONE</span>
+                </h1>
+                <p class="reveal delay-2 text-lg md:text-xl max-w-2xl mx-auto mb-12" style="color: var(--fg-light);">
+ Halaman ini kubuat khusus untuk kamu, sayangku. Sebuah website tempat aku menuliskan 
+                    segala hal yang sulit kusampaikan dengan kata-kata biasa.              <div class="reveal delay-3">
+                    <a href="#story" class="btn-love">
+                        Mulai Membaca
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 5v14M5 12l7 7 7-7"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating decoration -->
+        <div class="hidden lg:block absolute bottom-20 right-20 float-heart">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="var(--rose)" opacity="0.6">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 scroll-indicator">
+            <svg width="24" height="40" viewBox="0 0 24 40" fill="none">
+                <rect x="1" y="1" width="22" height="38" rx="11" stroke="var(--fg-light)" stroke-width="1.5"/>
+                <circle cx="12" cy="12" r="4" fill="var(--accent)"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Our Story Section -->
+    <section id="story" class="py-24 md:py-32" style="background: var(--bg-warm);">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <p class="reveal text-sm tracking-widest uppercase mb-4" style="color: var(--accent);">
+                    Our
+                </p>
+                <h2 class="reveal delay-1 font-serif text-4xl md:text-5xl font-light" style="color: var(--fg);">
+                    Story's journey
+                </h2>
+            </div>
+
+            <!-- Counter -->
+            <div class="reveal delay-2 flex flex-wrap justify-center gap-8 md:gap-16 mb-20 p-8 rounded-lg" style="background: white;">
+                <div class="text-center">
+                    <p class="counter-number" id="daysCounter">0</p>
+                    <p class="text-sm tracking-wide" style="color: var(--fg-light);">Our days together</p>
+                </div>
+                <div class="text-center">
+                    <p class="counter-number">∞</p>
+                    <p class="text-sm tracking-wide" style="color: var(--fg-light);">Memories</p>
+                </div>
+                <div class="text-center">
+                    <p class="counter-number">1</p>
+                    <p class="text-sm tracking-wide" style="color: var(--fg-light);">You are</p>
+                </div>
+            </div>
+
+            <!-- Timeline -->
+            <div class="relative">
+                <div class="timeline-line"></div>
+                
+                <div class="space-y-12 md:space-y-0">
+                    <!-- Timeline Item 1 -->
+                    <div class="reveal md:grid md:grid-cols-2 md:gap-8 items-center mb-12 md:mb-16">
+                        <div class="md:text-right md:pr-12 pl-12 md:pl-0">
+                            <span class="text-sm tracking-widest" style="color: var(--rose);">The first encounter</span>
+                            <h3 class="font-serif text-2xl mt-2 mb-3">Saat Mata Kita Bertemu</h3>
+                            <p style="color: var(--fg-light);">
+                                Aku masih ingat jelas hari itu. Kamu berdiri di sana, dan seketika 
+                                waktu seolah berhenti. Aku tidak tahu bahwa hari itu akan mengubah segalanya.
+                            </p>
+                        </div>
+                        <div class="hidden md:flex justify-start items-center pl-12">
+                            <div class="timeline-dot"></div>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Item 2 -->
+                    <div class="reveal delay-1 md:grid md:grid-cols-2 md:gap-8 items-center mb-12 md:mb-16">
+                        <div class="hidden md:flex justify-end items-center pr-12 order-1">
+                            <div class="timeline-dot"></div>
+                        </div>
+                        <div class="md:pl-12 md:order-2 pl-12">
+                            <span class="text-sm tracking-widest" style="color: var(--sage);">Our first chat</span>
+                            <h3 class="font-serif text-2xl mt-2 mb-3">Kata-kata yang Tidak Terlupakan</h3>
+                            <p style="color: var(--fg-light);">
+                                Suaramu masih terngiang di telingaku. Percakapan sederhana yang 
+                                ternyata menjadi awal dari segalanya. Aku tidak bisa berhenti memikirkanmu.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Item 3 -->
+                    <div class="reveal delay-2 md:grid md:grid-cols-2 md:gap-8 items-center mb-12 md:mb-16">
+                        <div class="md:text-right md:pr-12 pl-12 md:pl-0">
+                            <span class="text-sm tracking-widest" style="color: var(--terracotta);">Special moment</span>
+                            <h3 class="font-serif text-2xl mt-2 mb-3">Ketika Kita Menjadi Kita</h3>
+                            <p style="color: var(--fg-light);">
+                                Hari itu, aku tidak bisa berkata-kata. Hanya senyummu yang menjawab 
+                                segala kegelisahanku. Sejak saat itu, aku tahu kamu adalah rumah.
+                            </p>
+                        </div>
+                        <div class="hidden md:flex justify-start items-center pl-12">
+                            <div class="timeline-dot"></div>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Item 4 -->
+                    <div class="reveal delay-3 md:grid md:grid-cols-2 md:gap-8 items-center">
+                        <div class="hidden md:flex justify-end items-center pr-12 order-1">
+                            <div class="timeline-dot"></div>
+                        </div>
+                        <div class="md:pl-12 md:order-2 pl-12">
+                            <span class="text-sm tracking-widest" style="color: var(--accent);">Today</span>
+                            <h3 class="font-serif text-2xl mt-2 mb-3">Dan Seterusnya...</h3>
+                            <p style="color: var(--fg-light);">
+                                Setiap hari bersamamu adalah hadiah. Aku bersyukur bisa 
+                                melihatmu tertawa, mendengarmu cerita, dan memegang tanganmu.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Moments Gallery -->
+    <section id="moments" class="py-24 md:py-32">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <p class="reveal text-sm tracking-widest uppercase mb-4" style="color: var(--accent);">
+                    Galeri Kenangan
+                </p>
+                <h2 class="reveal delay-1 font-serif text-4xl md:text-5xl font-light" style="color: var(--fg);">
+                    Momen Indah Kita
+                </h2>
+            </div>
+
+            <!-- Photo Gallery -->
+            <div class="grid md:grid-cols-3 gap-8 md:gap-12">
+                <div class="reveal photo-frame">
+                    <div class="photo-tape"></div>
+                    <img src="https://i.pinimg.com/736x/dd/94/c5/dd94c52949140bcfa125ab65dd96c2fb.jpg" 
+                         alt="Momen bersama" 
+                         class="w-full aspect-square object-cover">
+                    <p class="font-serif text-center mt-4 italic" style="color: var(--fg-light);">
+                        Senyummu yang pertama
+                    </p>
+                </div>
+
+                <div class="reveal delay-1 photo-frame mt-8 md:mt-16">
+                    <div class="photo-tape"></div>
+                    <img src="https://i.pinimg.com/736x/37/15/d3/3715d395afe5f04a009c4ffb07d65c20.jpg" 
+                         alt="Momen bahagia" 
+                         class="w-full aspect-square object-cover">
+                    <p class="font-serif text-center mt-4 italic" style="color: var(--fg-light);">
+                        Tawa yang tak terlupakan
+                    </p>
+                </div>
+
+                <div class="reveal delay-2 photo-frame">
+                    <div class="photo-tape"></div>
+                    <img src="https://i.pinimg.com/736x/3f/3c/4f/3f3c4f675f41d56b0df4797735a137f8.jpg" 
+                         alt="Momen spesial" 
+                         class="w-full aspect-square object-cover">
+                    <p class="font-serif text-center mt-4 italic" style="color: var(--fg-light);">
+                        Detik yang kukenang selamanya
+                    </p>
+                </div>
+            </div>
+
+            <!-- Memory Cards -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-20">
+                <article class="reveal memory-card">
+                    <div class="p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background: var(--cream);">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--accent)">
+                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                </svg>
+                            </div>
+                            <span class="text-sm tracking-wide" style="color: var(--fg-light);">Hal Favorit</span>
+                        </div>
+                        <p class="font-serif text-lg" style="color: var(--fg);">
+                            Cara matamu berbinar saat cerita tentang sesuatu yang kamu sukai. 
+                            Itu adalah pemandangan paling indah yang pernah kulihat.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="reveal delay-1 memory-card">
+                    <div class="p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background: var(--cream);">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--sage)">
+                                    <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                                </svg>
+                            </div>
+                            <span class="text-sm tracking-wide" style="color: var(--fg-light);">Lagu Kita</span>
+                        </div>
+                        <p class="font-serif text-lg" style="color: var(--fg);">
+                            Setiap kali lagu itu diputar, aku selalu teringat padamu. 
+                            Melodi yang menjadi soundtrack dari setiap pikiranku tentang kamu.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="reveal delay-2 memory-card">
+                    <div class="p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background: var(--cream);">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--terracotta)">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                </svg>
+                            </div>
+                            <span class="text-sm tracking-wide" style="color: var(--fg-light);">Janjiku</span>
+                        </div>
+                        <p class="font-serif text-lg" style="color: var(--fg);">
+                            Aku berjanji akan selalu ada untukmu. Dalam suka maupun duka, 
+                            dalam tawa maupun air mata. Kamu tidak pernah sendiri.
+                        </p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Section -->
+    <section class="py-24 md:py-32 quote-section" style="background: var(--accent);">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <div class="reveal">
+                <p class="font-serif text-2xl md:text-3xl lg:text-4xl leading-relaxed" style="color: var(--cream);">
+                    "Di antara jutaan bintang di langit, <br class="hidden md:block">
+                    kamu adalah satu-satunya yang paling terang <br class="hidden md:block">
+                    di mata dan di hatiku."
+                </p>
+                <div class="mt-8 flex items-center justify-center gap-4">
+                    <span class="w-12 h-px" style="background: var(--rose);"></span>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--rose)">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                    <span class="w-12 h-px" style="background: var(--rose);"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Love Letter Section -->
+    <section id="letter" class="py-24 md:py-32">
+        <div class="max-w-3xl mx-auto px-6">
+            <div class="reveal love-letter p-8 md:p-12 lg:p-16 shadow-xl">
+                <p class="text-sm tracking-widest uppercase mb-8 text-center" style="color: var(--accent);">
+                    Sebuah Surat Untukmu
+                </p>
+                
+                <div class="font-serif text-lg md:text-xl leading-relaxed space-y-6" style="color: var(--fg);">
+                    <p>Untuk kamu yang selalu ada di pikiranku,</p>
+                    
+                    <p>
+                        Aku tidak tahu bagaimana caranya mengungkapkan perasaan ini dengan kata-kata yang tepat. 
+                        Tapi aku tahu bahwa setiap hari bersamamu adalah anugerah yang tidak akan pernah 
+                        bisa kubalas dengan cukup.
+                    </p>
+                    
+                    <p>
+                        Terima kasih sudah menjadi rumah yang selalu kurindukan. Terima kasih sudah 
+                        menjadi tempat berlindung saat dunia terasa terlalu berat. Terima kasih untuk 
+                        setiap tawa, setiap pelukan, setiap "aku sayang kamu" yang kauucapkan.
+                    </p>
+                    
+                    <p>
+                        Aku mungkin tidak sempurna. Aku mungkin sering salah. Tapi satu hal yang 
+                        akan selalu kujaga: cintaku untukmu. Karena kamu adalah satu-satunya yang 
+                        membuatku percaya bahwa kebahagiaan itu nyata.
+                    </p>
+                    
+                    <p class="italic" style="color: var(--accent);">
+                        Aku mencintaimu, kemarin, hari ini, dan untuk selamanya.
+                    </p>
+                    
+                    <p class="text-right mt-8">
+                        Dengan segenap cinta,<br>
+                        <span class="text-2xl" style="color: var(--accent);">Aku</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reasons Section -->
+    <section class="py-24 md:py-32" style="background: var(--bg-warm);">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <p class="reveal text-sm tracking-widest uppercase mb-4" style="color: var(--accent);">
+                    Hal-hal Kecil
+                </p>
+                <h2 class="reveal delay-1 font-serif text-4xl md:text-5xl font-light" style="color: var(--fg);">
+                    Alasan Aku Jatuh Cinta
+                </h2>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="reveal p-6 bg-white rounded transition-all hover:shadow-lg">
+                    <span class="font-serif text-4xl" style="color: var(--rose);">01</span>
+                    <p class="mt-4 font-serif text-lg">Cara kamu tersenyum saat melihat makanan favoritmu</p>
+                </div>
+                <div class="reveal delay-1 p-6 bg-white rounded transition-all hover:shadow-lg">
+                    <span class="font-serif text-4xl" style="color: var(--sage);">02</span>
+                    <p class="mt-4 font-serif text-lg">Suaramu yang selalu berhasil menenangkanku</p>
+                </div>
+                <div class="reveal delay-2 p-6 bg-white rounded transition-all hover:shadow-lg">
+                    <span class="font-serif text-4xl" style="color: var(--terracotta);">03</span>
+                    <p class="mt-4 font-serif text-lg">Cara kamu mendengarkan dengan penuh perhatian</p>
+                </div>
+                <div class="reveal delay-3 p-6 bg-white rounded transition-all hover:shadow-lg">
+                    <span class="font-serif text-4xl" style="color: var(--accent);">04</span>
+                    <p class="mt-4 font-serif text-lg">Tawamu yang menular dan menghangatkan hati</p>
+                </div>
+                <div class="reveal delay-4 p-6 bg-white rounded transition-all hover:shadow-lg">
+                    <span class="font-serif text-4xl" style="color: var(--rose);">05</span>
+                    <p class="mt-4 font-serif text-lg">Cara kamu selalu peduli dengan hal-hal kecil</p>
+                </div>
+                <div class="reveal delay-5 p-6 bg-white rounded transition-all hover:shadow-lg">
+                    <span class="font-serif text-4xl" style="color: var(--sage);">06</span>
+                    <p class="mt-4 font-serif text-lg">Semua yang membuatmu, kamu</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Section -->
+    <section class="py-24 md:py-32 text-center">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="reveal-scale inline-block mb-8 pulse-glow rounded-full p-8">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="var(--accent)">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+            </div>
+            
+            <h2 class="reveal font-serif text-4xl md:text-5xl lg:text-6xl font-light mb-6" style="color: var(--fg);">
+                Aku Sayang Kamu
+            </h2>
+            <p class="reveal delay-1 text-lg md:text-xl max-w-2xl mx-auto mb-12" style="color: var(--fg-light);">
+                Tidak ada kata-kata yang cukup untuk menggambarkan betapa berartinya dirimu bagiku. 
+                Tapi aku akan terus berusaha menunjukkannya setiap hari.
+            </p>
+            
+            <div class="reveal delay-2 flex flex-wrap justify-center gap-4">
+                <button id="heartBtn" class="btn-love">
+                    Kirim Cinta
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating Hearts Container -->
+    <div id="heartsContainer" class="fixed inset-0 pointer-events-none z-50 overflow-hidden"></div>
+
+    <!-- Footer -->
+    <footer class="py-12 text-center" style="background: var(--fg);">
+        <p class="font-serif text-xl mb-2" style="color: var(--cream);">
+            Dibuat dengan sepenuh hati
+        </p>
+        <p class="text-sm" style="color: var(--fg-light);">
+            Untuk satu-satunya yang istimewa
+        </p>
+        <div class="mt-6 flex justify-center">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--rose)">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+        </div>
+    </footer>
+
+    <script>
+        // Data
+        const relationshipStartDate = new Date('2024-01-01'); // Ganti dengan tanggal jadian
+
+        // DOM Elements
+        const navbar = document.getElementById('navbar');
+        const daysCounter = document.getElementById('daysCounter');
+        const heartBtn = document.getElementById('heartBtn');
+        const heartsContainer = document.getElementById('heartsContainer');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+
+        // Calculate days together
+        function calculateDays() {
+            const today = new Date();
+            const diffTime = Math.abs(today - relationshipStartDate);
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            return diffDays;
+        }
+
+        // Animate counter
+        function animateCounter(target, duration) {
+            const startTime = performance.now();
+            const startValue = 0;
+            const endValue = target;
+
+            function update(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const easeProgress = 1 - Math.pow(1 - progress, 3);
+                const currentValue = Math.floor(startValue + (endValue - startValue) * easeProgress);
+                
+                if (daysCounter) {
+                    daysCounter.textContent = currentValue;
+                }
+
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            }
+
+            requestAnimationFrame(update);
+        }
+
+        // Scroll reveal
+        function setupScrollReveal() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        
+                        // Trigger counter animation
+                        if (entry.target.querySelector('#daysCounter')) {
+                            animateCounter(calculateDays(), 2000);
+                        }
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // Navbar scroll effect
+        function setupNavbar() {
+            let lastScroll = 0;
+            
+            window.addEventListener('scroll', () => {
+                const currentScroll = window.pageYOffset;
+                
+                if (currentScroll > 100) {
+                    navbar.classList.add('nav-blur');
+                    navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.05)';
+                } else {
+                    navbar.classList.remove('nav-blur');
+                    navbar.style.boxShadow = 'none';
+                }
+                
+                lastScroll = currentScroll;
+            });
+        }
+
+        // Floating hearts animation
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = `<svg width="30" height="30" viewBox="0 0 24 24" fill="var(--rose)">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>`;
+            
+            heart.style.cssText = `
+                position: absolute;
+                bottom: -50px;
+                left: ${Math.random() * 100}%;
+                opacity: ${0.4 + Math.random() * 0.6};
+                transform: scale(${0.5 + Math.random() * 0.5});
+                animation: floatUp ${3 + Math.random() * 2}s ease-out forwards;
+            `;
+            
+            heartsContainer.appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 5000);
+        }
+
+        // Add float up animation
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = `
+            @keyframes floatUp {
+                0% {
+                    transform: translateY(0) rotate(0deg) scale(1);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(-100vh) rotate(${Math.random() > 0.5 ? '' : '-'}45deg) scale(0.5);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(styleSheet);
+
+        // Heart button click
+        function setupHeartButton() {
+            heartBtn.addEventListener('click', () => {
+                for (let i = 0; i < 20; i++) {
+                    setTimeout(() => createHeart(), i * 100);
+                }
+            });
+        }
+
+        // Smooth scroll for navigation
+        function setupSmoothScroll() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Mobile menu (simple toggle for now)
+        function setupMobileMenu() {
+            mobileMenuBtn.addEventListener('click', () => {
+                alert('Menu mobile bisa dikembangkan lebih lanjut sesuai kebutuhan');
+            });
+        }
+
+        // Parallax effect on hero
+        function setupParallax() {
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (prefersReducedMotion) return;
+
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const hero = document.querySelector('.hero-bg-image img');
+                if (hero && scrolled < window.innerHeight) {
+                    hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+                }
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            setupScrollReveal();
+            setupNavbar();
+            setupHeartButton();
+            setupSmoothScroll();
+            setupMobileMenu();
+            setupParallax();
+        });
+    </script>
+</body>
+</html>
