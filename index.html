@@ -195,19 +195,6 @@
             flex-shrink: 0;
         }
 
-        /* Memory cards */
-        .memory-card {
-            background: var(--card);
-            border-radius: 4px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-            transition: all 0.4s ease;
-        }
-        .memory-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
-        }
-
         /* Quote section */
         .quote-section {
             position: relative;
@@ -248,35 +235,6 @@
         .btn-love:focus-visible {
             outline: 2px solid var(--rose);
             outline-offset: 3px;
-        }
-
-        /* Photo gallery */
-        .photo-frame {
-            position: relative;
-            background: white;
-            padding: 12px 12px 40px 12px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-            transform: rotate(-2deg);
-            transition: transform 0.4s ease;
-        }
-        .photo-frame:nth-child(2) {
-            transform: rotate(1deg);
-        }
-        .photo-frame:nth-child(3) {
-            transform: rotate(-1deg);
-        }
-        .photo-frame:hover {
-            transform: rotate(0deg) scale(1.02);
-            z-index: 10;
-        }
-        .photo-tape {
-            position: absolute;
-            top: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 20px;
-            background: rgba(201, 169, 166, 0.6);
         }
 
         /* Scroll indicator */
@@ -337,11 +295,10 @@
         <div class="max-w-6xl mx-auto px-6">
             <div class="flex items-center justify-between h-20">
                 <a href="#" class="font-serif text-xl tracking-wide" style="color: var(--accent);">
-                    Untuk Kamu
+                    Proud of You
                 </a>
                 <div class="hidden md:flex items-center gap-8">
                     <a href="#story" class="text-sm tracking-wide transition-opacity hover:opacity-60" style="color: var(--fg-light);">Cerita Kita</a>
-                    <a href="#moments" class="text-sm tracking-wide transition-opacity hover:opacity-60" style="color: var(--fg-light);">Momen</a>
                     <a href="#letter" class="text-sm tracking-wide transition-opacity hover:opacity-60" style="color: var(--fg-light);">Surat</a>
                 </div>
                 <button id="mobileMenuBtn" class="md:hidden p-2" aria-label="Menu">
@@ -356,32 +313,32 @@
     </nav>
 
     <!-- Hero Section -->
-   <!-- Hero Section -->
-<section class="hero-section">
-    <!-- Background Image dengan Opacity Penuh -->
-    <div class="hero-bg-image opacity-15">
-        <img src="YO.jpg" 
-             alt="Romantic background" 
-             loading="eager"
-             class="w-full h-full object-cover">
-    </div>
-    
-    <!-- Overlay gelap agar teks terbaca -->
-    <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
-    
+    <section class="hero-section">
+        <!-- Background Image dengan Opacity Penuh -->
+        <div class="hero-bg-image opacity-15">
+            <img src="YO.jpg" 
+                 alt="Romantic background" 
+                 loading="eager"
+                 class="w-full h-full object-cover">
+        </div>
+        
+        <!-- Overlay gelap agar teks terbaca -->
+        <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
         
         <div class="relative z-10 w-full px-6">
             <div class="max-w-4xl mx-auto text-center">
                 <p class="reveal text-sm tracking-widest uppercase mb-6" style="color: var(--accent);">
-                    Sebuah Persembahan
+                    Khusus Untuk Kamu
                 </p>
                 <h1 class="reveal delay-1 font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light leading-tight mb-8" style="color: var(--fg);">
-                    YOU ARE <br>
-                    <span class="handwritten-underline" style="color: var(--accent);">THE ONLY ONE</span>
+                    AKU BANGGA <br>
+                    <span class="handwritten-underline" style="color: var(--accent);">SAMA KAMU</span>
                 </h1>
                 <p class="reveal delay-2 text-lg md:text-xl max-w-2xl mx-auto mb-12" style="color: var(--fg-light);">
- Halaman ini kubuat khusus untuk kamu, sayangku. Sebuah website tempat aku menuliskan 
-                    segala hal yang sulit kusampaikan dengan kata-kata biasa.              <div class="reveal delay-3">
+                    Kamu udah berjuang, kamu udah berani, kamu nggak menyerah. 
+                    Dan itu — lebih dari cukup buat aku.
+                </p>
+                <div class="reveal delay-3">
                     <a href="#story" class="btn-love">
                         Mulai Membaca
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -413,10 +370,10 @@
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-16">
                 <p class="reveal text-sm tracking-widest uppercase mb-4" style="color: var(--accent);">
-                    Our
+                    Perjalanan
                 </p>
                 <h2 class="reveal delay-1 font-serif text-4xl md:text-5xl font-light" style="color: var(--fg);">
-                    Story's journey
+                    Perjuangan yang Kamu Ukir
                 </h2>
             </div>
 
@@ -424,15 +381,15 @@
             <div class="reveal delay-2 flex flex-wrap justify-center gap-8 md:gap-16 mb-20 p-8 rounded-lg" style="background: white;">
                 <div class="text-center">
                     <p class="counter-number" id="daysCounter">0</p>
-                    <p class="text-sm tracking-wide" style="color: var(--fg-light);">Our days together</p>
+                    <p class="text-sm tracking-wide" style="color: var(--fg-light);">Hari kita bersama</p>
                 </div>
                 <div class="text-center">
                     <p class="counter-number">∞</p>
-                    <p class="text-sm tracking-wide" style="color: var(--fg-light);">Memories</p>
+                    <p class="text-sm tracking-wide" style="color: var(--fg-light);">Rasa bangga aku ke kamu</p>
                 </div>
                 <div class="text-center">
                     <p class="counter-number">1</p>
-                    <p class="text-sm tracking-wide" style="color: var(--fg-light);">You are</p>
+                    <p class="text-sm tracking-wide" style="color: var(--fg-light);">Orang paling aku banggain</p>
                 </div>
             </div>
 
@@ -444,11 +401,11 @@
                     <!-- Timeline Item 1 -->
                     <div class="reveal md:grid md:grid-cols-2 md:gap-8 items-center mb-12 md:mb-16">
                         <div class="md:text-right md:pr-12 pl-12 md:pl-0">
-                            <span class="text-sm tracking-widest" style="color: var(--rose);">The first encounter</span>
-                            <h3 class="font-serif text-2xl mt-2 mb-3">Saat Mata Kita Bertemu</h3>
+                            <span class="text-sm tracking-widest" style="color: var(--rose);">Saat kamu memulai</span>
+                            <h3 class="font-serif text-2xl mt-2 mb-3">Berani Mencoba</h3>
                             <p style="color: var(--fg-light);">
-                                Aku masih ingat jelas hari itu. Kamu berdiri di sana, dan seketika 
-                                waktu seolah berhenti. Aku tidak tahu bahwa hari itu akan mengubah segalanya.
+                                Kamu memilih untuk mencoba, bukan menyerah. Dan itu sudah 
+                                membuatku bangga bahkan sebelum hasilnya keluar.
                             </p>
                         </div>
                         <div class="hidden md:flex justify-start items-center pl-12">
@@ -462,11 +419,11 @@
                             <div class="timeline-dot"></div>
                         </div>
                         <div class="md:pl-12 md:order-2 pl-12">
-                            <span class="text-sm tracking-widest" style="color: var(--sage);">Our first chat</span>
-                            <h3 class="font-serif text-2xl mt-2 mb-3">Kata-kata yang Tidak Terlupakan</h3>
+                            <span class="text-sm tracking-widest" style="color: var(--sage);">Saat kamu berjuang</span>
+                            <h3 class="font-serif text-2xl mt-2 mb-3">Usaha yang Nggak Kecil</h3>
                             <p style="color: var(--fg-light);">
-                                Suaramu masih terngiang di telingaku. Percakapan sederhana yang 
-                                ternyata menjadi awal dari segalanya. Aku tidak bisa berhenti memikirkanmu.
+                                Aku tahu kamu udah kerja keras. Setiap usaha yang kamu lakuin — 
+                                itu nyata, dan itu sangat berharga buatku.
                             </p>
                         </div>
                     </div>
@@ -474,11 +431,11 @@
                     <!-- Timeline Item 3 -->
                     <div class="reveal delay-2 md:grid md:grid-cols-2 md:gap-8 items-center mb-12 md:mb-16">
                         <div class="md:text-right md:pr-12 pl-12 md:pl-0">
-                            <span class="text-sm tracking-widest" style="color: var(--terracotta);">Special moment</span>
-                            <h3 class="font-serif text-2xl mt-2 mb-3">Ketika Kita Menjadi Kita</h3>
+                            <span class="text-sm tracking-widest" style="color: var(--terracotta);">Saat ada yang nggak berjalan mulus</span>
+                            <h3 class="font-serif text-2xl mt-2 mb-3">Kesalahan Teknis Bukan Kesalahanmu</h3>
                             <p style="color: var(--fg-light);">
-                                Hari itu, aku tidak bisa berkata-kata. Hanya senyummu yang menjawab 
-                                segala kegelisahanku. Sejak saat itu, aku tahu kamu adalah rumah.
+                                Ada hal-hal di luar kendalimu. Tapi kamu tetap berdiri, 
+                                dan itu justru yang paling membuatku kagum.
                             </p>
                         </div>
                         <div class="hidden md:flex justify-start items-center pl-12">
@@ -492,116 +449,15 @@
                             <div class="timeline-dot"></div>
                         </div>
                         <div class="md:pl-12 md:order-2 pl-12">
-                            <span class="text-sm tracking-widest" style="color: var(--accent);">Today</span>
-                            <h3 class="font-serif text-2xl mt-2 mb-3">Dan Seterusnya...</h3>
+                            <span class="text-sm tracking-widest" style="color: var(--accent);">Sekarang dan seterusnya</span>
+                            <h3 class="font-serif text-2xl mt-2 mb-3">Aku Akan Selalu Ada</h3>
                             <p style="color: var(--fg-light);">
-                                Setiap hari bersamamu adalah hadiah. Aku bersyukur bisa 
-                                melihatmu tertawa, mendengarmu cerita, dan memegang tanganmu.
+                                Apapun hasilnya, aku di sini. Bangga sama kamu hari ini, 
+                                besok, dan selamanya. Kamu nggak pernah sendirian.
                             </p>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Moments Gallery -->
-    <section id="moments" class="py-24 md:py-32">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <p class="reveal text-sm tracking-widest uppercase mb-4" style="color: var(--accent);">
-                    Galeri Kenangan
-                </p>
-                <h2 class="reveal delay-1 font-serif text-4xl md:text-5xl font-light" style="color: var(--fg);">
-                    Momen Indah Kita
-                </h2>
-            </div>
-
-            <!-- Photo Gallery -->
-            <div class="grid md:grid-cols-3 gap-8 md:gap-12">
-                <div class="reveal photo-frame">
-                    <div class="photo-tape"></div>
-                    <img src="https://i.pinimg.com/736x/dd/94/c5/dd94c52949140bcfa125ab65dd96c2fb.jpg" 
-                         alt="Momen bersama" 
-                         class="w-full aspect-square object-cover">
-                    <p class="font-serif text-center mt-4 italic" style="color: var(--fg-light);">
-                        Senyummu yang pertama
-                    </p>
-                </div>
-
-                <div class="reveal delay-1 photo-frame mt-8 md:mt-16">
-                    <div class="photo-tape"></div>
-                    <img src="https://i.pinimg.com/736x/37/15/d3/3715d395afe5f04a009c4ffb07d65c20.jpg" 
-                         alt="Momen bahagia" 
-                         class="w-full aspect-square object-cover">
-                    <p class="font-serif text-center mt-4 italic" style="color: var(--fg-light);">
-                        Tawa yang tak terlupakan
-                    </p>
-                </div>
-
-                <div class="reveal delay-2 photo-frame">
-                    <div class="photo-tape"></div>
-                    <img src="https://i.pinimg.com/736x/3f/3c/4f/3f3c4f675f41d56b0df4797735a137f8.jpg" 
-                         alt="Momen spesial" 
-                         class="w-full aspect-square object-cover">
-                    <p class="font-serif text-center mt-4 italic" style="color: var(--fg-light);">
-                        Detik yang kukenang selamanya
-                    </p>
-                </div>
-            </div>
-
-            <!-- Memory Cards -->
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-20">
-                <article class="reveal memory-card">
-                    <div class="p-6">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background: var(--cream);">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--accent)">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </div>
-                            <span class="text-sm tracking-wide" style="color: var(--fg-light);">Hal Favorit</span>
-                        </div>
-                        <p class="font-serif text-lg" style="color: var(--fg);">
-                            Cara matamu berbinar saat cerita tentang sesuatu yang kamu sukai. 
-                            Itu adalah pemandangan paling indah yang pernah kulihat.
-                        </p>
-                    </div>
-                </article>
-
-                <article class="reveal delay-1 memory-card">
-                    <div class="p-6">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background: var(--cream);">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--sage)">
-                                    <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
-                                </svg>
-                            </div>
-                            <span class="text-sm tracking-wide" style="color: var(--fg-light);">Lagu Kita</span>
-                        </div>
-                        <p class="font-serif text-lg" style="color: var(--fg);">
-                            Setiap kali lagu itu diputar, aku selalu teringat padamu. 
-                            Melodi yang menjadi soundtrack dari setiap pikiranku tentang kamu.
-                        </p>
-                    </div>
-                </article>
-
-                <article class="reveal delay-2 memory-card">
-                    <div class="p-6">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background: var(--cream);">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--terracotta)">
-                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                                </svg>
-                            </div>
-                            <span class="text-sm tracking-wide" style="color: var(--fg-light);">Janjiku</span>
-                        </div>
-                        <p class="font-serif text-lg" style="color: var(--fg);">
-                            Aku berjanji akan selalu ada untukmu. Dalam suka maupun duka, 
-                            dalam tawa maupun air mata. Kamu tidak pernah sendiri.
-                        </p>
-                    </div>
-                </article>
             </div>
         </div>
     </section>
@@ -611,10 +467,10 @@
         <div class="max-w-4xl mx-auto px-6 text-center">
             <div class="reveal">
                 <p class="font-serif text-2xl md:text-3xl lg:text-4xl leading-relaxed" style="color: var(--cream);">
-                        "Nilai bisa dikejar, <br class="hidden md:block">
-                        tapi keberanian untuk mencoba <br class="hidden md:block">
-                        itu tidak semua orang punya — dan kamu punya itu."
-                    </p>
+                    "Apapun hasilnya, yang paling membuatku bangga <br class="hidden md:block">
+                    adalah fakta bahwa kamu berani mencoba <br class="hidden md:block">
+                    dan nggak pernah menyerah."
+                </p>
                 <div class="mt-8 flex items-center justify-center gap-4">
                     <span class="w-12 h-px" style="background: var(--rose);"></span>
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--rose)">
@@ -635,34 +491,40 @@
                 </p>
                 
                 <div class="font-serif text-lg md:text-xl leading-relaxed space-y-6" style="color: var(--fg);">
-                    <p>Untuk kamu yang baru saja melewati perjuangan itu,</p>
+                    <p>Untuk kamu yang baru saja berjuang,</p>
                     
                     <p>
-                        Aku mau kamu tahu satu hal — aku bangga. Bukan soal angkanya, 
-                        bukan soal hasilnya sesuai ekspektasimu atau tidak. Aku bangga 
-                        karena <em>kamu mau berusaha</em>. Karena kamu tidak diam, tidak menyerah, 
-                        dan memilih untuk mencoba.
+                        Aku nggak tahu harus mulai dari mana. Tapi aku tahu satu hal yang pasti — 
+                        aku bangga sama kamu. Bukan karena hasilnya, bukan karena nilainya. 
+                        Tapi karena kamu mau mencoba.
                     </p>
                     
                     <p>
-                        Kesalahan teknis itu menyebalkan, aku tahu. Dan aku ikut sedih kalau kamu sedih. 
-                        Tapi dengarkan aku — usahamu itu nyata. Keberanianmu itu nyata. 
-                        Dan itu jauh lebih berharga dari nilai apapun yang bisa ditulis di kertas.
+                        Kamu tahu betapa berartinya itu? Di saat banyak orang memilih menyerah sebelum mulai, 
+                        kamu tetap berjalan. Kamu mengerjakan itu dengan seluruh usaha yang kamu punya. 
+                        Dan itu — <em>itu</em> — adalah hal yang paling berharga buatku.
                     </p>
                     
                     <p>
-                        Aku akan selalu jadi orang pertama yang berdiri di barisanmu, 
-                        yang bertepuk tangan paling keras, yang paling bangga bilang 
-                        <em>"itu cowokku."</em> Apapun hasilnya — aku bangga punya kamu.
+                        Mungkin ada kesalahan teknis yang bikin hasilnya nggak sesuai yang kamu harapin. 
+                        Mungkin kamu kecewa. Dan aku ngerti itu. Tapi aku mau kamu tau — 
+                        kekecewaan itu nggak menghapus semua kerja keras yang udah kamu lakuin. 
+                        Nggak ada yang bisa ngambil itu dari kamu.
+                    </p>
+                    
+                    <p>
+                        Aku akan jadi orang pertama yang tepuk tangan buat kamu. Bukan nanti, 
+                        bukan kalau hasilnya sempurna — tapi sekarang, persis di titik ini, 
+                        di mana kamu masih berdiri meski merasa lelah.
                     </p>
                     
                     <p class="italic" style="color: var(--accent);">
-                        Nilai bisa dikejar, tapi keberanian untuk mencoba itu tidak semua orang punya. Dan kamu punya itu.
+                        Aku bangga punya kamu. Kemarin, hari ini, dan untuk selamanya.
                     </p>
                     
                     <p class="text-right mt-8">
-                        Dengan segenap kebanggaan dan cinta,<br>
-                        <span class="text-2xl" style="color: var(--accent);">Aku</span>
+                        Dengan segenap cinta dan kebanggaan,<br>
+                        <span class="text-2xl" style="color: var(--accent);">Aku ♡</span>
                     </p>
                 </div>
             </div>
@@ -674,37 +536,37 @@
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-16">
                 <p class="reveal text-sm tracking-widest uppercase mb-4" style="color: var(--accent);">
-                    Hal-hal Kecil
+                    Hal-hal yang Bikin Aku Bangga
                 </p>
                 <h2 class="reveal delay-1 font-serif text-4xl md:text-5xl font-light" style="color: var(--fg);">
-                    Alasan Aku Jatuh Cinta
+                    Kenapa Aku Bangga Sama Kamu
                 </h2>
             </div>
 
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div class="reveal p-6 bg-white rounded transition-all hover:shadow-lg">
                     <span class="font-serif text-4xl" style="color: var(--rose);">01</span>
-                    <p class="mt-4 font-serif text-lg">Cara kamu tersenyum saat melihat makanan favoritmu</p>
+                    <p class="mt-4 font-serif text-lg">Kamu berani mencoba, padahal hasilnya belum pasti</p>
                 </div>
                 <div class="reveal delay-1 p-6 bg-white rounded transition-all hover:shadow-lg">
                     <span class="font-serif text-4xl" style="color: var(--sage);">02</span>
-                    <p class="mt-4 font-serif text-lg">Suaramu yang selalu berhasil menenangkanku</p>
+                    <p class="mt-4 font-serif text-lg">Kamu nggak menyerah meski keadaan nggak selalu mendukung</p>
                 </div>
                 <div class="reveal delay-2 p-6 bg-white rounded transition-all hover:shadow-lg">
                     <span class="font-serif text-4xl" style="color: var(--terracotta);">03</span>
-                    <p class="mt-4 font-serif text-lg">Cara kamu mendengarkan dengan penuh perhatian</p>
+                    <p class="mt-4 font-serif text-lg">Usahamu yang nyata, jauh lebih berharga dari angka manapun</p>
                 </div>
                 <div class="reveal delay-3 p-6 bg-white rounded transition-all hover:shadow-lg">
                     <span class="font-serif text-4xl" style="color: var(--accent);">04</span>
-                    <p class="mt-4 font-serif text-lg">Tawamu yang menular dan menghangatkan hati</p>
+                    <p class="mt-4 font-serif text-lg">Kamu mau bangkit lagi bahkan saat kecewa</p>
                 </div>
                 <div class="reveal delay-4 p-6 bg-white rounded transition-all hover:shadow-lg">
                     <span class="font-serif text-4xl" style="color: var(--rose);">05</span>
-                    <p class="mt-4 font-serif text-lg">Cara kamu tetap berjuang bahkan saat hasilnya tidak sempurna</p>
+                    <p class="mt-4 font-serif text-lg">Keberanianmu untuk terus melangkah walau takut</p>
                 </div>
                 <div class="reveal delay-5 p-6 bg-white rounded transition-all hover:shadow-lg">
                     <span class="font-serif text-4xl" style="color: var(--sage);">06</span>
-                    <p class="mt-4 font-serif text-lg">Keberanianmu untuk mencoba, bukan memilih untuk menyerah</p>
+                    <p class="mt-4 font-serif text-lg">Semua yang membuat kamu jadi dirimu — itu sudah lebih dari cukup</p>
                 </div>
             </div>
         </div>
@@ -720,11 +582,11 @@
             </div>
             
             <h2 class="reveal font-serif text-4xl md:text-5xl lg:text-6xl font-light mb-6" style="color: var(--fg);">
-                Aku Sayang Kamu
+                Aku Bangga Sama Kamu
             </h2>
             <p class="reveal delay-1 text-lg md:text-xl max-w-2xl mx-auto mb-12" style="color: var(--fg-light);">
-                Tidak ada kata-kata yang cukup untuk menggambarkan betapa berartinya dirimu bagiku. 
-                Tapi aku akan terus berusaha menunjukkannya setiap hari.
+                Nggak perlu nilai sempurna buat aku bangga. Kamu udah cukup, 
+                lebih dari cukup — persis seperti dirimu sekarang.
             </p>
             
             <div class="reveal delay-2 flex flex-wrap justify-center gap-4">
@@ -744,10 +606,10 @@
     <!-- Footer -->
     <footer class="py-12 text-center" style="background: var(--fg);">
         <p class="font-serif text-xl mb-2" style="color: var(--cream);">
-            Dibuat dengan sepenuh hati
+            Dibuat dengan sepenuh hati dan kebanggaan
         </p>
         <p class="text-sm" style="color: var(--fg-light);">
-            Untuk satu-satunya yang istimewa
+            Untuk satu-satunya yang paling aku banggain
         </p>
         <div class="mt-6 flex justify-center">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--rose)">
